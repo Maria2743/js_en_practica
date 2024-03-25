@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const formulario = document.getElementById('formulario');
+            formulario.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const nombre = document.getElementById('nombre').value;
+                const asunto = document.getElementById('asunto').value;
+                const mensaje = document.getElementById('mensaje').value;
+
+                const nombreValido = /^[a-zA-Z]+$/.test(nombre);
+                const asuntoValido = /^[a-zA-Z]+$/.test(asunto);
+                const mensajeValido = mensaje.trim().length > 0;
+
+                if (!nombreValido) {
+                    document.querySelector('.errorNombre').textContent = 'Ingrese un nombre válido';
+                } else {
+                    document.querySelector('.errorNombre').textContent = '';
+                }
+
+                if (!asuntoValido) {
+                    document.querySelector('.errorAsunto').textContent = 'Ingrese un asunto válido';
+                } else {
+                    document.querySelector('.errorAsunto').textContent = '';
+                }
+
+                if (!mensajeValido) {
+                    document.querySelector('.errorMensaje').textContent = 'Ingrese un mensaje válido';
+                } else {
+                    document.querySelector('.errorMensaje').textContent = '';
+                }
+
+                if (nombreValido && asuntoValido && mensajeValido) {
+                    document.querySelector('.resultado').textContent = 'Formulario enviado correctamente';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <h2>
+                Resultado: <span class="resultado"></span>
+            </h2>
+            <div>
+                <div>
+                    <div>
+                        <label for="">Valor 1</label>
+                        <input id="valor1" type="text">
+                    </div>
+                    <div>
+                        <label for="">Valor 2</label>
+                        <input id="valor2" type="text">
+                    </div>
+                    <div style="display: flex">
+                        <button id="btn-sumar" type="button">
+                            Sumar
+                        </button>
+                        <button id="btn-restar" type="button">
+                            Restar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const resultado = document.querySelector('.resultado');
+            const valor1 = document.getElementById('valor1');
+            const valor2 = document.getElementById('valor2');
+            const btnSumar = document.getElementById('btn-sumar');
+            const btnRestar = document.getElementById('btn-restar');
+
+
+            function esNumero(valor) {
+                return /^\d+$/.test(valor);
+            }
+
+            btnSumar.addEventListener('click', function () {
+                if (!esNumero(valor1.value) || !esNumero(valor2.value)) {
+                    resultado.textContent = 'Por favor ingrese solo números';
+                    return;
+                }
+
+                const num1 = parseFloat(valor1.value) || 0;
+                const num2 = parseFloat(valor2.value) || 0;
+                const suma = num1 + num2;
+                resultado.textContent = suma;
+            });
+
+            btnRestar.addEventListener('click', function () {
+                if (!esNumero(valor1.value) || !esNumero(valor2.value)) {
+                    resultado.textContent = 'Por favor ingrese solo números';
+                    return;
+                }
+
+                const num1 = parseFloat(valor1.value) || 0;
+                const num2 = parseFloat(valor2.value) || 0;
+                const resta = Math.max(num1 - num2, 0); // No mostrar números negativos
+                resultado.textContent = resta;
+            });
+        });
+
+    </script>
+</body>
+
+</html>
